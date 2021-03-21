@@ -143,3 +143,14 @@ h6 {
     height: 90vh;
   }
 }
+
+
+/* For desktop: */
+.queryHeight2 {height: 60vh;}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="queryHeight2"] {
+    height: 90vh;
+  }
+}
