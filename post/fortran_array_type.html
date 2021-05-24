@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Fortran: Fastest way to organize data</title>
+        <!-- Favicon-->
+        <link rel="icon" href="../img/logo.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                  Home
+                </a>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('../img/jeremy-thomas-E0AHdsENmDg-unsplash.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Datasets organization in Fortran for fast memory access</h1>
+                            <h2 class="subheading">A comparison between 1D array, 2D array and type</h2>
+                            <span class="meta">
+                                Posted on May 21, 2021
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7 post-text">
+                        <br>
+
+                        <blockquote class="blockquote">
+                          <!-- Why still using Fortran?
+                          Because it remains one of the faster programming language and is ideal for
+                          high performance computing. -->
+                          Supposing you have 10 000 particles with 10 variables each in your simulations.
+                          What are the optimized ways to organize the data? 1D arrays? 2D arrays? Derived type?
+                        </blockquote>
+
+                        <h2 class="section-heading"> Introduction </h2>
+
+                        <p>
+                          For more than half a century, Fortran compilers have been optimised to reach the highest performances,
+                          including memory access,
+                          and they are quite good at it.
+                          However, the way we store data in arrays can degrade those performances.
+                          During massive simulations, the time spends
+                          on memory access to retrieve values from huge arrays can be harmful for time efficiency.
+                          To deal with arrays, the most effective approach is to iterate over the order in which they are stored in memory.
+                        </p>
+
+                        <p>
+                          In this tutorial, we'll propose three methods to store our data.
+                          The first one relies only on <a href="#Method1">1D arrays</a>,
+                          the second one use a single <a href="#Method2">2D array</a>
+                          and the last one rely on <a href="#Method3">derived data type</a>.
+                        </p>
+
+                        <p>
+                          The code used for the example is available <a href="https://gist.github.com/DamienMinenna/df7be9172e0411c8b596a72f6b0504f5" target="_blank">here</a>.
+                          To facilitate understanding of the methods, we named the variables, respectively:
+                          positions x, y, z;
+                          velocities vx, vy, vz; amplitude Ax, Ay and Az; and a phase Phi.
+                          To check the efficiency of each method, we run a dummy time algorithm
+                          with 100 time steps where we perform the same operations on each variable.
+                        </p>
+
+                        <div class="alert alert-warning" role="alert">
+                          The run time claims here can differ significantly 
+                          depending on many things such as hardware (processors, memory, etc.),
+                          compilers, compilation options, etc.
+                        </div>
+
+                        <h2 class="section-heading" id="Method1"> Method 1: only 1D arrays </h2>
+
+                        <p>
+                          The first method is to have an 1D array for each variable.
+                          It is probably not the "cleanest" approach, but it is the simplest to understand.
+                          The main drawback is that, we each new variable, we need to write the new array and allocate it.
+                          After more than 20-30 variables, this method becomes unnecessary redundant.
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/a0fe4124feb887ce4ff320f893da0282.js"></script>
+
+                        <p>
+                          When testing this method for 10 000 particles during 100 step times,
+                          the run time is <b>5.044 seconds</b> long. Not bad, but can we improve it?
+                        </p>
+
+                        <h2 class="section-heading" id="Method2"> Method 2: one 2D array </h2>
+
+                        <p>
+                          The second method is put all the datasets into a single 2D array.
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/86c4fb4ac8d48f676ae3b983dc2beada.js"></script>
+
+                        <p>
+                          Then we allocate it with 
+                        </p>
+
+                        <pre>allocate(particle(n, p_DIM))</pre>
+                        <p>
+                          Notice the integers <tt>p_x, p_y, ...</tt>. There are just indexes to name the variables and to help you access it.
+                          Instead of writing <tt>particle(i, 9)</tt> to access the 9th variable of your <tt>i</tt>th particle, use 
+                          <tt>particle(i, p_NAME)</tt> with <tt>p_NAME</tt> the name of your variable.
+                          When you need a new variable, just add its index and increment <tt>p_DIM</tt>. This method allows you to quickly organize your data.
+                          The data must be of the same type (integer, real, ...).
+                        </p>
+
+
+                        <p>
+                          It is well-known that, in Fortran, arrays are stored in
+                          <a href="https://en.wikipedia.org/wiki/Row-_and_column-major_order" target="_blank">column-major order</a>.
+                          The order in which you allocate the 2D array can drastically increase the run time.
+                          
+                          If you correctly allocate the 2D array (assuming <tt>n > p_DIM</tt>) as
+                        </p>
+                          <pre>allocate(particle(n, p_DIM))</pre>
+                        <p>
+                          the run time with our example is <b>6.371 seconds</b>.
+                          It's a little bit longer than the first method, but the discrepancy is not terrible.
+                        </p>
+
+                        <p>
+                          Hovewer, if you allocate the 2D array as
+                        </p>
+                        <pre>allocate(particle(p_DIM, n))</pre>
+                        <p>
+                          the run time reaches <b>57.469 seconds</b>! Ten times longer while the only difference in the code is that we call our variables
+                          <tt>particle(p_NAME, i)</tt> instead of <tt>particle(i, p_NAME)</tt>. 
+                        </p>
+
+                        <h4 class="section-heading"> Pointers </h4>
+                        <p>
+                          If you don't like using the indexes, you can define a pointer to each varable
+                        </p>
+                        <script src="https://gist.github.com/DamienMinenna/07c7f1733cccabe3a6be561e05f5d6a2.js"></script>
+                        <p>
+                          Then you can access and modify the data using <tt>particle_x(i)</tt> as for the 1D arrays. The run time with 10 pointers is <b>6.397 seconds</b> long 
+                          (with the 2D array correctly allocated). Just a tad slower than without the pointers.
+                        </p>
+
+                        <h2 class="section-heading" id="Method3"> Method 3: using type </h2>
+
+                        <p>
+                          In Fortran, we can use derived data types to create objects.
+                          With our example, we have two possibilities: create 10 000 objects, each with 10 individual variables or
+                          create a single object with 10 arrays of size 10 000. 
+                          We can initiate the 10 000 objects as (we also give an example of how we can use a procedure)
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/6f8446c3b1f8745d19c7d7dec2603ef3.js"></script>
+
+                        <p>
+                          The objects are allocated using <tt>allocate(particle(n))</tt> and we access the values using the syntax <tt>particle(i)%x</tt>.
+                          However, here the run time of our example is <b>57.506 seconds</b>. Almost the same as if we use a row-major 2D array.
+                          This is because Fortran will organize the memory in a similar way.
+                        </p>
+
+                        <p>
+                          The other possibility relies on a single object. Note that, to allocate the variables, we rely on a procedure contained 
+                          within the type. 
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/81baf65d6eb83e6f7ec22d73e55b8ae6.js"></script>
+
+                        <p>
+                          Here, we access the values using the syntax <tt>particle%x(i)</tt>.
+                          The run time with our example is <b>5.030 seconds</b>.
+                          Jackpot!
+                        </p>
+
+                        <h2 class="section-heading" id="conclu"> Conclusion </h2>
+
+                        <p>
+                          As seen with our example, a simple change in the organization of
+                          datasets can add a factor 10 in the run time.
+                          The three methods proposed, if correctly used, give nearly the same efficiency.
+                        </p>
+
+                        <p>
+                          <a href="https://gist.github.com/DamienMinenna/df7be9172e0411c8b596a72f6b0504f5" target="_blank">Link to the full code.</a>
+                          Thanks to David for his advices.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">
+                        Copyright &copy; Damien Minenna
+                        <!-- This script automatically adds the current year to your website footer-->
+                        <!-- (credit: https://updateyourfooter.com/)-->
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                    </div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                      <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/damien-minenna/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                      <a class="btn btn-dark btn-social mx-2" href="https://github.com/DamienMinenna/" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                    <!-- <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                    </div> -->
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
