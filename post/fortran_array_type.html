@@ -93,8 +93,7 @@
                         <h2 class="section-heading" id="Method1"> Method 1: only 1D arrays </h2>
 
                         <p>
-                          The first method is to have an 1D array for each variable.
-                          It is probably not the "cleanest" approach, but it is the simplest to understand.
+                          The first method, and the simplest to understand, is to have an 1D array for each variable.
                           The main drawback is that, we each new variable, we need to write the new array and allocate it.
                           After more than 20-30 variables, this method becomes unnecessary redundant.
                         </p>
@@ -103,7 +102,7 @@
 
                         <p>
                           When testing this method for 10 000 particles during 100 step times,
-                          the run time is <b>5.044 seconds</b> long. Not bad, but can we improve it?
+                          the run time is <b>5.0 seconds</b> long. Not bad, but can we improve it?
                         </p>
 
                         <h2 class="section-heading" id="Method2"> Method 2: one 2D array </h2>
@@ -137,7 +136,7 @@
                         </p>
                           <pre>allocate(particle(n, p_DIM))</pre>
                         <p>
-                          the run time with our example is <b>6.371 seconds</b>.
+                          the run time with our example is <b>6.3 seconds</b>.
                           It's a little bit longer than the first method, but the discrepancy is not terrible.
                         </p>
 
@@ -146,7 +145,7 @@
                         </p>
                         <pre>allocate(particle(p_DIM, n))</pre>
                         <p>
-                          the run time reaches <b>57.469 seconds</b>! Ten times longer while the only difference in the code is that we call our variables
+                          the run time reaches <b>57.4 seconds</b>! Ten times longer while the only difference in the code is that we call our variables
                           <tt>particle(p_NAME, i)</tt> instead of <tt>particle(i, p_NAME)</tt>. 
                         </p>
 
@@ -156,8 +155,8 @@
                         </p>
                         <script src="https://gist.github.com/DamienMinenna/07c7f1733cccabe3a6be561e05f5d6a2.js"></script>
                         <p>
-                          Then you can access and modify the data using <tt>particle_x(i)</tt> as for the 1D arrays. The run time with 10 pointers is <b>6.397 seconds</b> long 
-                          (with the 2D array correctly allocated). Just an insignificant tad slower than without the pointers.
+                          Then you can access and modify the data using <tt>particle_x(i)</tt> as for the 1D arrays. The run time with 10 pointers is <b>6.3 seconds</b> long 
+                          (with the 2D array correctly allocated), the same as without the pointers.
                         </p>
 
                         <h2 class="section-heading" id="Method3"> Method 3: using type </h2>
@@ -173,8 +172,7 @@
 
                         <p>
                           The objects are allocated using <tt>allocate(particle(n))</tt> and we access the values using the syntax <tt>particle(i)%x</tt>.
-                          However, here the run time of our example is <b>57.506 seconds</b>. Almost the same as if we use a row-major 2D array.
-                          This is because Fortran will organize the memory in a similar way.
+                          However, here the run time of our example is <b>57.5 seconds</b>. Almost the same as if we use a row-major 2D array.
                         </p>
 
                         <p>
@@ -186,8 +184,35 @@
 
                         <p>
                           Here, we access the values using the syntax <tt>particle%x(i)</tt>.
-                          The run time with our example is <b>5.030 seconds</b>.
-                          Jackpot!
+                          The run time with our example is <b>5.0 seconds</b>, the same as when using the 1D arrays.
+                          
+                        </p>
+
+                        <h2 class="section-heading" id="Method4"> Bonus method: the perfect array </h2>
+
+                        <p>
+                          However, it is possible to reach the perfection using only a single 1D array containing all the data.
+                          The trick is to store them using the order in which you will need them.
+                          For our example, this means the array is ordered as <tt>(/ Phi_1, vx_1, vy_1, vz_1, x_1, y_1, z_1, Phi_2, ..., z_n, Ax_1, Ay_1, ... /)</tt>.
+                          Easy.
+                          If you need a previous value, store it with a temporary buffer (to avoid having to restart a loop in the memory).
+
+                        </p>
+
+                        <p>
+                          With this method, and again without changing the operation order, we achieve a run time of <b>5 x 10<sup>-3</sup> seconds</b>! 
+                          A gain of 3 orders of magnitude, just from our memory management.
+
+                          Of course, this method has several important drawbacks. Programming and debuging can become quickly a nightmare. 
+                          You cannot change the operation order without completely spoiled the time saving. In our example, we use the same order for each iteration.
+                          This is not always possible. 
+                          For instance, in physical simulations, particles can interact with their nearest neighbours and then move to new neighborhoods. 
+                          This makes the method impossible to use in such context.   
+                          
+                        </p>
+
+                        <p> 
+                          A possible good reason to use it anyway is when fulfilling a friend's request while wanting to break ties with him.
                         </p>
 
                         <h2 class="section-heading" id="conclu"> Conclusion </h2>
@@ -200,7 +225,7 @@
 
                         <p>
                           <a href="https://gist.github.com/DamienMinenna/df7be9172e0411c8b596a72f6b0504f5" target="_blank">Link to the full code.</a>
-                          Thanks to David and Mikael for their advices.
+                          Thanks to David, Mikael and Élise for their advices.
                         </p>
 
                     </div>
