@@ -119,10 +119,55 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Portfolio</h2>
-
-                    <h3 class="section-subheading text-muted">Work in progress...</h3>
+                    <h3 class="section-subheading text-muted">Section in progress...</h3>
                 </div>
-
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 1-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="img/electron1.png" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">DIMOHA</div>
+                                <div class="portfolio-caption-subheading text-muted">Software developpement</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 2-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="img/ChoCoTeX-preview.png" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">ChoCoTeX</div>
+                                <div class="portfolio-caption-subheading text-muted">Web application</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 3-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="img/EPJH1.jpg" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Traveling-wave tube's history</div>
+                                <div class="portfolio-caption-subheading text-muted">Science popularization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -175,6 +220,153 @@
             </div>
         </footer>
 
+
+
+        <!-- Portfolio Modals-->
+        <!-- Portfolio item 1 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><i class="far fa-window-close"></i></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">DIMOHA</h2>
+                                    <p class="item-intro text-muted">A numerical tool for traveling-wave tubes simulations.</p>
+                                    <img class="img-fluid d-block mx-auto" src="img/electron.png" alt="..." />
+                                    <p>Illustration: Electron momenta from a simulation of the wave-particle interaction</p>
+                                    <p>
+                                        Traveling-wave tubes are electronic tubes used to amplify radio-waves, 
+                                        which have a lot of applications, from radar to space telecommunication or plasmas characterisation. 
+                                        Simulations of traveling-wave tubes in nonlinear regime is a challenge due to the large number of parameters involved
+                                        and require new numerical tools such as DIMOHA. 
+                                        DIMOHA is built for industrial design, telecommunication operations and wave-particle research.
+                                    </p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Collaboration: </strong> 
+                                            <ul class="list-inline">
+                                                <li>Centre National d'Études Spatiales CNES (French space agency)  </li>
+                                                <li>Thales Group (Satellite manufacturer)</li>
+                                                <li>PIIM laboratory, Aix-Marseille University-CNRS</li>
+                                            </ul>                                   
+                                        </li>
+                                        <li>
+                                            <strong>Technologies: </strong> 
+                                            <ul class="list-inline">
+                                                <li>Python (numpy, matplotlib)</li>
+                                                <li>Fortran (lapack, fftw)</li>
+                                                <li>Matlab</li>
+                                                <li>Message passing interface (MPI)</li>
+                                                <li>High-performance computing (HPC)</li>                                        
+                                            </ul>                                   
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 2 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><i class="far fa-window-close"></i></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">ChoCoTeX</h2>
+                                    <p class="item-intro text-muted">Fast equation generator</p>
+                                    <img class="img-fluid d-block mx-auto" style="width: 50%;" src="img/ChoCoTeX-preview.png" alt="..." />
+                                    <p>
+                                        ChoCoTeX is an open-source web application to generate vector PDF with a transparent background from LaTeX equations.
+                                        Those PDF can be copied in the clipboard and immediately pasted in typesetting or presentation softwares, such as Word or PowerPoint. 
+                                        ChoCoTeX use the web framework Django.
+                                    </p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Technologies: </strong> 
+                                            <ul class="list-inline">
+                                                <li>Python</li>
+                                                <li>Django</li>
+                                                <li>HTML / CSS</li>
+                                                <li>LaTeX</li>                                        
+                                            </ul>                                   
+                                        </li>
+                                        <li>
+                                            <strong>Link: </strong> 
+                                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/DamienMinenna/ChoCoTeX" target="_blank"><i class="fab fa-github"></i></a>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 3 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><i class="far fa-window-close"></i></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">The traveling-wave tube in the history of telecommunication</h2>
+                                    <p class="item-intro text-muted">Published article</p>
+                                    <img class="img-fluid d-block mx-auto" style="width: 50%;" src="img/EPJH.jpg" alt="..." />
+                                    <ul class="list-inline">
+                                        <li>
+                                            <strong>Abstract:</strong>
+                                            The traveling-wave tube is a critical subsystem for satellite data transmission. 
+                                            Its role in the history of wireless communications and in the space conquest is significant, 
+                                            but largely ignored, even though the device remains widely used nowadays. 
+                                            This paper presents, albeit non-exhaustively, circumstances and contexts 
+                                            that led to its invention, and its part in the worldwide (in particular in Europe) 
+                                            expansion of TV broadcasting via microwave radio relays and satellites. 
+                                            We also discuss its actual contribution to space applications and its conception. 
+                                            The originality of this paper comes from the wide period covered 
+                                            (from first slow-wave structures in 1889 to present space projects) and 
+                                            from connection points made between this device and commercial exploitations. 
+                                            The appendix deals with an intuitive pedagogical description of the wave–particle interaction.
+                                        </li>
+                                        <li>
+                                            <strong>Editor link: </strong> 
+                                            <a href="https://link.springer.com/article/10.1140/epjh/e2018-90023-1" target="_blank">https://link.springer.com/article/10.1140/epjh/e2018-90023-1</a>
+                                        </li>
+                                        <li>
+                                            <strong>Preprint: </strong> 
+                                            <a href="https://hal.archives-ouvertes.fr/hal-01754885/document" target="_blank">https://hal.archives-ouvertes.fr/hal-01754885/document</a>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>

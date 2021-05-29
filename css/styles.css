@@ -11035,6 +11035,7 @@ header.masthead .post-heading .meta a {
   max-width: 26rem;
   margin-left: auto;
   margin-right: auto;
+  border-radius: .5rem!important;
 }
 #portfolio .portfolio-item .portfolio-link {
   position: relative;
@@ -11046,7 +11047,7 @@ header.masthead .post-heading .meta a {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(255, 200, 0, 0.9);
+  background: #155195;
   align-items: center;
   justify-content: center;
   opacity: 0;
