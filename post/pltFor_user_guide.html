@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>pltFor user guide</title>
+        <!-- Favicon-->
+        <link rel="icon" href="../img/logo.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="../index.html">
+                  Home
+                </a>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('../img/jeremy-thomas-E0AHdsENmDg-unsplash.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>pltFor library</h1>
+                            <h2 class="subheading">A Fortran-Python interface library to plot figures directly in Fortran</h2>
+                            <span class="meta">
+                                Posted on July 21, 2021
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7 post-text">
+                        <br>
+
+                        <h1>Introduction</h1>
+                        <p>
+                            <a href="https://github.com/DamienMinenna/pltFor" target="_blank">Link to the library and the installation manual.</a>
+                          </p>
+
+                        <p> 
+                            <b>pltFor</b> (reads "plot for") is an open-source Fortran-Python interface library. It allows to plot figures directly in Fortran. 
+                            Basically, one can save matplotlib figures from Fortran data without creating an output.
+                            Here an example:
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/a55a03191a4b5d30c9384fd9b0f7ab29.js"></script>
+
+                        <p>This example generates the following figure:</p>
+
+                        <img class="img-fluid" src="../img/plt_plot.jpg" alt="..." />
+
+                        <p>
+                            It is equivalent to make outputs for x and y, then read it in Python and execute the following code:
+                        </p>
+
+<pre>
+import matplotlib.pyplot as plt
+
+plt.figure()
+plt.plot(x[:], y[:], color='black', marker='o', linestyle='solid', linewidth=2, markersize=5)
+plt.grid()
+plt.title(title)
+plt.xlabel(xlabel)
+plt.ylabel(ylabel)
+plt.tight_layout()
+plt.savefig(filename)
+</pre>
+                        <p>
+                            <b>How it work? </b>
+                            The plot functions are written within a Python3 Matplotlib script. 
+                            With the Python package CFFI, our script is used to generate a shared library with a C-style binding interface. 
+                            This library is linked to the Fortran code with a classical C-Fortran interface.
+                        </p>
+
+                        <p> 
+                            <b>Advantages:</b>
+                            <ul>
+                                <li>Easy to use, easy to install.</li>
+                                <li>Open source and modifiable.</li>
+                                <li>Do not require to write output files to be read by external languages.</li>
+                                <li>Do not generate external files, aside the wanted figures.</li>
+                                <li>Performed during the Fortran execution.</li>
+                                <li>Do not run command lines during the Fortran execution.</li>
+                                <li>The same approach can be used to run Python script modifying the Fortran variables (the memory is shared between Fortran and Python).</li>
+                            </ul>
+
+                            <b>Drawbacks:</b>
+                            <ul>
+                                <li>Do not save the variables. Therefore, to re-plot the figures, we need to run again the Fortran code.</li>
+                                <li>Exotic plot options, such as advanced multiplot or adding annotations, are not taken into account.</li>
+                            </ul>
+                        </p>
+
+                        <h1>Available subroutines</h1>
+
+                        <div class="alert alert-warning" role="alert">
+                            Remarks: Arguments x, y, s, c, mat_X and mat_Y must be in double precision (real64). You can convert arrays and matricies using REAL(x, 8) where 8 is the double precision kind.
+                        </div>
+
+                        <p>Few subroutines are currently available. Others may come.</p>
+
+                        <h4>Quick plot</h4>
+
+                        <p>
+                            The plt_plot subroutine allows quick plot.
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/700106aba5ae21a6d7698c0f05eeaea7.js"></script>
+
+                        <p>It generates the following figure:</p>
+
+                        <img class="img-fluid" src="../img/plt_plot.jpg" alt="..." />          
+                        
+
+                        <h4>Advanced plot</h4>
+
+                        <p>
+                            Identical to the quick plot, but with more options.
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/80756b2efc17c5c5f89b5e558664ec07.js"></script>
+
+                        <p>It generates the following figure:</p>
+                        <img class="img-fluid" src="../img/plt_plot_adv.jpg" alt="..." />
+
+                        <h4>Advanced multiplot</h4>
+
+                        <p>
+                            Allows to plot several curves on the same figure.
+                        </p>
+
+                        <script src="https://gist.github.com/DamienMinenna/37014f7c161c003958c840f944c98a81.js"></script>
+
+                        <div class="alert alert-warning" role="alert">
+                            All curves must have the same number of points. mat_X and mat_Y must be 2D arrays of dimension (row, colomn) with row the number of data points and colomn the number of plots.
+                            Different markers, linestyles and colors can be used. Write them in a single string with ; as separator.
+                            Linewidth and markersize can be modified and must be both defined in a 1D array.
+                        </div>
+
+                        <p>It generates the following figure:</p>
+                        <img class="img-fluid" src="../img/plt_multiplot.jpg" alt="..." />
+
+                        <h4>Scatter plot</h4>
+
+                        <script src="https://gist.github.com/DamienMinenna/99817304ba930e78e2dd30093f1a4824.js"></script>
+
+                        <div class="alert alert-warning" role="alert">
+                            If you do not want to modify the size or the color, you can just pass x/x as argument to send an array of ones.
+                        </div>
+
+                        <p>It generates the following figure:</p>
+                        <img class="img-fluid" src="../img/plt_scatter.jpg" alt="..." />
+
+
+                        <h1>Conclusion</h1>
+
+                        <p>
+                            After a quick installation, <b>pltFor</b> allows to quickly check any Fortran arrays without creating a dedicated output. 
+                            It can be an ideal tool for development in Fortran or for quick diagnostic that does not need to be processed after.
+                        </p>
+
+                        <p> 
+                            The library builder used here is inspired from <a href="https://www.noahbrenowitz.com/post/calling-fortran-from-python/" target="_blank">this post</a>.
+                            See it for more information on how to build Fortran-Python interfaces.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">
+                        Copyright &copy; Damien Minenna
+                        <!-- This script automatically adds the current year to your website footer-->
+                        <!-- (credit: https://updateyourfooter.com/)-->
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                    </div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                      <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/damien-minenna/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                      <a class="btn btn-dark btn-social mx-2" href="https://github.com/DamienMinenna/" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                    <!-- <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                    </div> -->
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
