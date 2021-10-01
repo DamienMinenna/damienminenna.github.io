@@ -51,11 +51,11 @@
                         <h1>Introduction</h1>
                         <p>
                             <a href="https://github.com/DamienMinenna/pltFor" target="_blank">Link to the library and the installation manual.</a>
-                          </p>
+                        </p>
 
                         <p> 
                             <b>pltFor</b> (reads "plot for") is an open-source Fortran-Python interface library. It allows to plot figures directly in Fortran. 
-                            Basically, one can save matplotlib figures from Fortran data without creating an output.
+                            Basically, one can generate and save matplotlib plots from Fortran codes without creating outputs.
                             Here an example:
                         </p>
 
@@ -84,8 +84,8 @@ plt.savefig(filename)
                         <p>
                             <b>How it work? </b>
                             The plot functions are written within a Python3 Matplotlib script. 
-                            With the Python package CFFI, our script is used to generate a shared library with a C-style binding interface. 
-                            This library is linked to the Fortran code with a classical C-Fortran interface.
+                            With the Python package CFFI, the script is used to generate a shared library with a C-style binding interface. 
+                            This library is then linked to the Fortran code with a classical C-Fortran interface.
                         </p>
 
                         <p> 
