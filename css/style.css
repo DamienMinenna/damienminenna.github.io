@@ -68,18 +68,11 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
 }
 
 .hero h1 {
-  margin: 0 0 1.5rem;
-  font-size: clamp(3.25rem, 10vw, 6.5rem);
+  margin: 0 0 2rem;
+  font-size: clamp(3rem, 8vw, 5.25rem);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.035em;
-}
-
-.lede {
-  max-width: 30rem;
-  margin: 0 0 1.75rem;
-  font-size: clamp(1.125rem, 2.2vw, 1.25rem);
-  line-height: 1.5;
 }
 
 .links {
@@ -93,15 +86,10 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
 
 .hero-figure { margin: 0; }
 .hero-figure img { width: 100%; }
-.hero-figure figcaption {
-  margin-top: 0.5rem;
-  font-size: 0.8125rem;
-  color: var(--muted);
-}
 
 @media (min-width: 60rem) {
   .hero {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
     gap: 3rem;
   }
@@ -127,14 +115,12 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
   .block { grid-template-columns: 13rem minmax(0, 1fr); gap: 2rem; }
 }
 
-.about { display: grid; gap: 1.5rem; max-width: 48rem; }
-.portrait { width: 9rem; aspect-ratio: 1; object-fit: cover; object-position: 50% 30%; }
-@media (min-width: 40rem) {
-  .about { grid-template-columns: 9rem minmax(0, var(--measure)); gap: 2rem; align-items: start; }
+.about { display: grid; gap: 2rem; max-width: var(--measure); }
+.about h3 { margin: 0 0 0.4rem; font-size: 1.0625rem; font-weight: 600; line-height: 1.6; }
+.about p { margin: 0; color: var(--muted); }
+@media (min-width: 64rem) {
+  .about { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; max-width: none; }
 }
-
-.prose p { margin: 0 0 1em; }
-.prose p:last-child { margin-bottom: 0; }
 
 /* Footer ------------------------------------------------------------------ */
 

@@ -128,20 +128,15 @@ def main():
     def to_svg(zp, rp):
         return (zp + zmax) * sx, (rmax - rp) * sy
 
-    # Draw order mimics a current ramp: bore lines first, then outwards,
-    # the shielding return flux last.
-    order = sorted(range(len(levels)), key=lambda i: (levels[i] < 0, abs(levels[i])))
-    rank = {lvl_idx: n for n, lvl_idx in enumerate(order)}
-    paths = []  # (d, delay in s)
-    for lvl_idx, seg_list in enumerate(cs.allsegs):
-        delay = 0.35 + 0.07 * rank[lvl_idx]
+    paths = []
+    for seg_list in cs.allsegs:
         for seg in seg_list:
             if len(seg) < 8:
                 continue
             for mirror in (1, -1):
                 pts = simplify([to_svg(p[0], mirror * p[1]) for p in seg], 0.15)
                 d = "M" + "L".join(f"{x:.1f} {y:.1f}" for x, y in pts)
-                paths.append((d, delay))
+                paths.append(d)
 
     rects = []
     for (zc, hl, _), rad in [(b, MAIN_R) for b in MAIN_BLOCKS] + [
@@ -168,18 +163,12 @@ def main():
         "vector-effect:non-scaling-stroke}"
         ".fl-lines .axis{stroke-opacity:.35;stroke-dasharray:6 5}"
         ".fl-coils rect{fill:#2846A8}"
-        "@media (prefers-reduced-motion:no-preference){"
-        ".fl-lines path:not(.axis){stroke-dasharray:1;stroke-dashoffset:1;"
-        "animation:fl-draw 1.6s cubic-bezier(.45,0,.2,1) forwards}"
-        ".fl-coils{opacity:0;animation:fl-in .5s ease-out forwards}"
-        "@keyframes fl-draw{to{stroke-dashoffset:0}}"
-        "@keyframes fl-in{to{opacity:1}}}"
         "</style>",
         '<g class="fl-lines" fill="none" mask="url(#fl-mask)">',
         f'<path class="axis" d="M0 {H/2:.1f}L{W} {H/2:.1f}"/>',
     ]
-    for d, delay in paths:
-        svg.append(f'<path pathLength="1" style="animation-delay:{delay:.2f}s" d="{d}"/>')
+    for d in paths:
+        svg.append(f'<path d="{d}"/>')
     svg.append("</g>")
     svg.append('<g class="fl-coils">')
     for x0, y0, w, h in rects:
