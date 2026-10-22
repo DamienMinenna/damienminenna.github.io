@@ -13,35 +13,26 @@
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-
   <header class="site-header">
     <a class="brand" href="./" aria-label="Damien Minenna, home">
       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M12 3 L2.5 20 L21.5 20 Z"/><path d="M20 4 L8 28.5 L31 28.5 Z"/></svg>
-      Damien Minenna
     </a>
-    <nav aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#publications">Publications</a>
-      <a href="#contact">Contact</a>
-    </nav>
   </header>
 
-  <main id="main">
+  <main>
     <section class="hero" aria-labelledby="hero-name">
       <div class="hero-text">
         <h1 id="hero-name">Damien<br>Minenna</h1>
         <p class="lede">Physicist at CEA Paris-Saclay. I design superconducting magnets and build the optimisation and machine-learning tools that help design them.</p>
         <ul class="links" aria-label="Profiles">
           <li><a href="https://scholar.google.com/citations?user=GOBxc_sAAAAJ&amp;hl=en">Google Scholar</a></li>
-          <li><a href="https://github.com/DamienMinenna">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/damien-minenna/">LinkedIn</a></li>
           <li><a href="https://www.researchgate.net/profile/Damien_Minenna">ResearchGate</a></li>
+          <li><a href="https://www.linkedin.com/in/damien-minenna/">LinkedIn</a></li>
+          <li><a href="https://github.com/DamienMinenna">GitHub</a></li>
         </ul>
       </div>
       <figure class="hero-figure">
@@ -50,86 +41,21 @@
       </figure>
     </section>
 
-    <section class="block" id="about" aria-labelledby="about-title">
+    <section class="block" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
-      <div class="block-body about">
+      <div class="about">
         <img class="portrait" src="img/MinennaPhoto.jpg" width="1098" height="1169" alt="Portrait of Damien Minenna" loading="lazy">
         <div class="prose">
-          <p>I work on superconducting magnets for particle accelerators and MRI at <a href="https://irfu.cea.fr/">Irfu</a>, the CEA institute for fundamental research, in its Department of Accelerators, Cryogenics and Magnetism (DACM).</p>
-          <p>My work sits between physics and computing. I lead the development of ALESIA, a platform that optimises magnet designs across electromagnetism, mechanics and quench behaviour, and I am the AI expert of my laboratory.</p>
-          <p>Before that, I spent several years on wave–particle interaction: traveling-wave tubes for satellite telecommunications with Thales and the French space agency (CNES), then electromagnetic pulses in laser–plasma experiments. I hold a PhD in physics.</p>
+          <p>I work at <a href="https://irfu.cea.fr/">Irfu</a>, the CEA institute for fundamental research, in the Department of Accelerators, Cryogenics and Magnetism. I develop ALESIA, a platform that optimises superconducting magnet designs across electromagnetism, mechanics and quench behaviour, and I am the AI expert of my laboratory.</p>
+          <p>Before joining Irfu, I worked on wave–particle interaction: traveling-wave tubes for satellite telecommunications with Thales and the French space agency (CNES), then electromagnetic pulses in laser–plasma experiments. I hold a PhD in physics.</p>
+          <p>To get in touch, send me a message on <a href="https://www.linkedin.com/in/damien-minenna/">LinkedIn</a>.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="block" id="career" aria-labelledby="career-title">
-      <h2 id="career-title">Career</h2>
-      <ol class="block-body timeline" reversed>
-        <li>
-          <span class="when"><span class="todo">20XX</span>–now</span>
-          <div><strong>Physicist, CEA Paris-Saclay, Irfu</strong><br>Superconducting magnet design, multiphysics optimisation, AI.</div>
-        </li>
-        <li>
-          <span class="when"><span class="todo">20XX–20XX</span></span>
-          <div><strong>Research engineer, <span class="todo">laboratory?</span></strong><br>Electromagnetic pulses in short-pulse laser–plasma interaction.</div>
-        </li>
-        <li>
-          <span class="when"><span class="todo">2016–20XX</span></span>
-          <div><strong>PhD in physics, <span class="todo">Aix-Marseille University?</span></strong><br>Wave–particle interaction in traveling-wave tubes, with Thales and CNES.</div>
-        </li>
-      </ol>
-    </section>
-
-    <section class="block" id="projects" aria-labelledby="projects-title">
-      <h2 id="projects-title">Projects</h2>
-      <div class="block-body">
-        <article class="project">
-          <h3>ALESIA</h3>
-          <p>An optimisation and data-management platform for superconducting magnet design. It combines nonlinear programming, evolutionary algorithms, active learning and surrogate models, and drives physics codes such as OPERA and CAST3M so that magnetic, conductor, mechanical and quench constraints are optimised together.</p>
-          <p class="refs"><a href="https://arxiv.org/abs/2603.29740">Preprint, arXiv 2026</a> <a href="https://indico.cern.ch/event/1431972/contributions/6420382">Poster, MT29, Boston 2025</a></p>
-        </article>
-        <article class="project">
-          <h3>DIMOHA</h3>
-          <p>A time-domain code for traveling-wave tubes, the microwave amplifiers on board telecommunication satellites. It rests on an N-body Hamiltonian model of the wave–particle interaction and runs in parallel on HPC clusters. Developed with Thales, CNES and the PIIM laboratory (Aix-Marseille University, CNRS).</p>
-          <p class="refs"><span>Fortran, MPI, Python</span></p>
-        </article>
-        <article class="project">
-          <h3>ChoCoTeX</h3>
-          <p>An open-source web app that turns LaTeX equations into vector PDFs with a transparent background, ready to paste into Word or PowerPoint.</p>
-          <p class="refs"><a href="https://github.com/DamienMinenna/ChoCoTeX">Code on GitHub</a></p>
-        </article>
-      </div>
-    </section>
-
-    <section class="block" id="publications" aria-labelledby="publications-title">
-      <h2 id="publications-title">Selected publications</h2>
-      <div class="block-body">
-        <ol class="pubs">
-          <li><span class="year">2026</span><div><a class="pub-title" href="https://arxiv.org/abs/2603.29740">Data-driven optimisation of superconducting magnets at CEA Paris-Saclay</a><span class="pub-meta">D. F. G. Minenna et al. arXiv:2603.29740</span></div></li>
-          <li><span class="year">2020</span><div><span class="pub-title">Impact of the target holder on return currents and GHz electromagnetic pulses in short-pulse laser interactions</span><span class="pub-meta">D. F. G. Minenna, A. Poyé, P. Bradford, N. Woolsey, V. T. Tikhonchuk. Physics of Plasmas 27, 063102</span></div></li>
-          <li><span class="year">2020</span><div><span class="pub-title">Electromagnetic momenta for wave–particle systems in vacuum waveguides: universality of the Abraham–Minkowski dilemma for photon momenta beyond dielectric materials</span><span class="pub-meta">D. F. G. Minenna, Y. Elskens, F. Doveil, F. André. The European Physical Journal D 74, 103</span></div></li>
-          <li><span class="year">2019</span><div><span class="pub-title">DIMOHA: a time-domain algorithm for traveling-wave tube simulations</span><span class="pub-meta">D. F. G. Minenna, Y. Elskens, F. André, A. Poyé, J. Puech, F. Doveil. IEEE Transactions on Electron Devices 66, 4042</span></div></li>
-          <li><span class="year">2019</span><div><span class="pub-title">Recent discrete model for small-signal analysis of traveling-wave tubes</span><span class="pub-meta">D. F. G. Minenna, A. G. Terentyuk, F. André, Y. Elskens, N. M. Ryskin. Physica Scripta 94, 055601</span></div></li>
-          <li><span class="year">2019</span><div><a class="pub-title" href="https://link.springer.com/article/10.1140/epjh/e2018-90023-1">The traveling-wave tube in the history of telecommunication</a><span class="pub-meta">D. F. G. Minenna, F. André, Y. Elskens, J.-F. Auboin, F. Doveil, J. Puech, É. Duverdier. The European Physical Journal H 44, 1</span></div></li>
-          <li><span class="year">2018</span><div><span class="pub-title">Electromagnetic power and momentum in N-body Hamiltonian approach to wave–particle dynamics in a periodic structure</span><span class="pub-meta">D. F. G. Minenna, Y. Elskens, F. André, F. Doveil. Europhysics Letters 122, 44002</span></div></li>
-        </ol>
-        <p class="more"><a href="https://scholar.google.com/citations?user=GOBxc_sAAAAJ&amp;hl=en">Full list on Google Scholar</a></p>
-      </div>
-    </section>
-
-    <section class="block" id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact</h2>
-      <div class="block-body prose">
-        <p>The best way to reach me is by email at <span class="todo">address to confirm</span>, or through <a href="https://www.linkedin.com/in/damien-minenna/">LinkedIn</a>.</p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <p>© <span id="year">2026</span> Damien Minenna</p>
-      <p class="footer-links"><a href="https://github.com/DamienMinenna">GitHub</a> <a href="https://scholar.google.com/citations?user=GOBxc_sAAAAJ&amp;hl=en">Scholar</a> <a href="https://www.linkedin.com/in/damien-minenna/">LinkedIn</a></p>
-    </div>
+    <p>© <span id="year">2026</span> Damien Minenna</p>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
