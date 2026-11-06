@@ -59,12 +59,10 @@ a:focus-visible {
 
 /* Hero -------------------------------------------------------------------- */
 
-main { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
-
 .hero {
-  display: grid;
-  gap: 2rem;
-  padding: clamp(2.5rem, 9vw, 7rem) 0 clamp(3rem, 9vw, 7rem);
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 8vw, 5.5rem) var(--gutter) clamp(0.5rem, 2vw, 1.5rem);
 }
 
 .hero h1 {
@@ -84,23 +82,37 @@ main { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
   list-style: none;
 }
 
-.hero-figure { margin: 0; }
-.hero-figure img { width: 100%; }
-
-@media (min-width: 60rem) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 3rem;
-  }
+/* Animation band (js/hero.js): a nominal stage scaled to the width of the band */
+.hero-anim {
+  display: none;
+  position: relative;
+  max-width: 1680px;
+  margin: 0 auto clamp(0.5rem, 2vw, 1.25rem);
+  aspect-ratio: 1920 / 640;
+  overflow: hidden;
 }
+.js .hero-anim { display: block; }
+.hero-anim.is-narrow { aspect-ratio: 980 / 700; }
+@media (max-width: 51.25rem) { .hero-anim { aspect-ratio: 980 / 700; } }
+.hero-anim-stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+@media (prefers-reduced-motion: reduce) { .hero-anim .md-caret { animation: none; } }
 
 /* About ------------------------------------------------------------------- */
 
 .block {
+  position: relative;
   display: grid;
   gap: 1rem;
-  padding: 2.75rem 0 4rem;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 2.75rem var(--gutter) 4rem;
+}
+.block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  right: var(--gutter);
   border-top: 1px solid var(--rule);
 }
 

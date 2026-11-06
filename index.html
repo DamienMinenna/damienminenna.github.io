@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <header class="site-header">
@@ -22,19 +23,16 @@
 
   <main>
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-text">
-        <h1 id="hero-title">Hello,<br>I am Damien!</h1>
-        <ul class="links" aria-label="Profiles">
-          <li><a href="https://www.linkedin.com/in/damien-minenna/">LinkedIn</a></li>
-          <li><a href="https://github.com/DamienMinenna">GitHub</a></li>
-          <li><a href="https://scholar.google.com/citations?user=GOBxc_sAAAAJ&amp;hl=en">Google Scholar</a></li>
-          <li><a href="https://www.researchgate.net/profile/Damien_Minenna">ResearchGate</a></li>
-        </ul>
-      </div>
-      <figure class="hero-figure">
-        <img src="img/field-lines.svg" width="620" height="400" alt="Magnetic field lines of an actively shielded superconducting solenoid, in cross-section.">
-      </figure>
+      <h1 id="hero-title">Hello,<br>I am Damien!</h1>
+      <ul class="links" aria-label="Profiles">
+        <li><a href="https://www.linkedin.com/in/damien-minenna/">LinkedIn</a></li>
+        <li><a href="https://github.com/DamienMinenna">GitHub</a></li>
+        <li><a href="https://scholar.google.com/citations?user=GOBxc_sAAAAJ&amp;hl=en">Google Scholar</a></li>
+        <li><a href="https://www.researchgate.net/profile/Damien_Minenna">ResearchGate</a></li>
+      </ul>
     </section>
+
+    <div class="hero-anim" role="img" aria-label="Animation: simulation windows for magnetic, mechanics, conductor, quench and beam dynamics design appear one after the other, each blocked from the next."></div>
 
     <section class="block" aria-labelledby="about-title">
       <h2 id="about-title">About me</h2>
@@ -59,5 +57,7 @@
     <p>Copyright © Damien Minenna <span id="year">2026</span></p>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="js/magnet-design.js"></script>
+  <script src="js/hero.js"></script>
 </body>
 </html>
